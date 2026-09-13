@@ -54,9 +54,9 @@ jobs:
             ${{ env.EXE_NAME }}
             ${{ env.EXE_NAME }}.sha256
           body: |
-            JTalk extended dictionary (NAIST-JDIC + nvdajp custom entries), built from this
-            repository's recipe. Contains sys.dic, matrix.bin, char.bin, unk.dic, dicrc,
-            DIC_VERSION -- all six files are required together.
+            JTalk extended dictionary (NAIST-JDIC + bep-eng.dic + nvdajp custom entries), built from this
+            repository's recipe for NVDA Japanese version (nvdajp).
+            Contains sys.dic, matrix.bin, char.bin, unk.dic, dicrc, DIC_VERSION -- all six files are required together.
 
             See DIC_VERSION inside the archive for the exact build timestamp, and
             ${{ env.ZIP_NAME }}.sha256 for the archive checksum.

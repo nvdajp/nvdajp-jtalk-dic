@@ -1,23 +1,18 @@
 # coding: utf-8
 # make_jdic.py
 # Copyright (C) 2010-2026 Takuya Nishimoto
-# License: BSD 3-Clause. See LICENSE.
+# License: GPL-2.0-or-later. See LICENSE.
 #
-# Build the JTalk extended dictionary (NAIST-JDIC + nvdajp custom entries)
-# with a prebuilt mecab-dict-index tool. This dictionary is shared by JTalk
-# speech synthesis and libkuraji's word-separation stage (translator2); see
-# ../../README.md.
+# Build the JTalk extended dictionary (NAIST-JDIC + bep-eng.dic + nvdajp custom entries)
+# with a prebuilt mecab-dict-index tool. This dictionary is built for NVDA Japanese
+# version (nvdajp) speech synthesis; see README.md.
 #
-# mecab-dict-index is not vendored here: build it from MeCab source (BSD/
-# LGPL/GPL tri-license) or obtain it from an nvdajp checkout after running
-# `scons jtalkSync`.
+# mecab-dict-index is not vendored here: build it from MeCab source (Makefile.mak)
+# or obtain it from GitHub Releases.
 #
-# Unlike nvdajp's own build, this does not include the English word-reading
-# entries (nvdajp-eng-dic.csv, built from bep-eng.dic by eng_dic_maker.py in
-# nvdajp): bep-eng.dic is a third-party GPL-licensed dictionary (from the
-# CPAN module Lingua::JA::Yomi), incompatible with this repository's BSD
-# 3-Clause license. That is not a problem for nvdajp itself (nvdajp as a
-# whole is GPL-licensed), but it is for a BSD-licensed extraction.
+# This build includes the English word-reading entries (nvdajp-eng-dic.csv, built
+# from bep-eng.dic by eng_dic_maker.py). bep-eng.dic is GPL-licensed (from the
+# CPAN module Lingua::JA::Yomi).
 
 import argparse
 import os
@@ -179,7 +174,8 @@ def _main():
 
 		tankan_dic_maker.make_dic(code, cs_file, thisdir)
 		custom_dic_maker.make_dic(code, thisdir)
-		eng_dic_maker.make_dic(code, thisdir)
+		engdic = jtdir / "bep-eng.dic"
+		eng_dic_maker.make_dic(engdic, code, thisdir)
 
 		files = [
 			"dicrc",
